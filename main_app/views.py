@@ -70,7 +70,11 @@ class ToyDelete(DeleteView):
   model = Toy
   success_url = '/toys'
 
-def assoc_toy(request, cat_id, toy_id):
+def assoc_toy(request, finch_id, toy_id):
   # Note that you can pass a toy's id instead of the whole toy object
-  Cat.objects.get(id=cat_id).toys.add(toy_id)
-  return redirect('detail', cat_id=cat_id)
+  Finch.objects.get(id=finch_id).toys.add(toy_id)
+  return redirect('detail', finch_id=finch_id)
+
+def unassoc_toy(request, finch_id, toy_id):
+  Finch.objects.get(id=finch_id).toys.remove(toy_id)
+  return redirect('detail', finch_id=finch_id)
